@@ -11,15 +11,16 @@ class User < ActiveRecord::Base
  
   USER_STATUS = %w(spectator md player judge admin)
 
-  #has_attached_file :avatar,
-  #                  :styles => { :thumb => "50x50>", :medium => "200x200>", :large => "640x640>"},
-  #                  :url => "/system/user_logo/:attachment/:id_partition/:style/:filename"
-
   has_attached_file :avatar,
-    :styles => { :thumb => "50x50>", :medium => "200x200>", :large => "640x640>"},
-    :storage => :s3,
-    :s3_credentials => "#{Rails.root}/config/amazon_s3.yml",
-    :path => "/user-logo/:id/:style/:filename"
+                    :styles => { :thumb => "50x50>", :medium => "200x200>", :large => "640x640>"},
+                    :path => "public/system/user_logo/:attachment/:id_partition/:style/:filename",
+                    :url => "/system/user_logo/:attachment/:id_partition/:style/:filename"
+
+  #has_attached_file :avatar,
+  #  :styles => { :thumb => "50x50>", :medium => "200x200>", :large => "640x640>"},
+  #  :storage => :s3,
+  #  :s3_credentials => "#{Rails.root}/config/amazon_s3.yml",
+  #  :path => "/user-logo/:id/:style/:filename"
 
   ## Relationship
   has_many :authentication_tokens, :dependent => :destroy

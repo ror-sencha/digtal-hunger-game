@@ -5,10 +5,15 @@ class PlayerChallenge < ActiveRecord::Base
 
 	accepts_nested_attributes_for :comments	#	,:allow_destroy => true
 
-	has_attached_file :avatar,
-    :storage => :s3,
-    :s3_credentials => "#{Rails.root}/config/amazon_s3.yml",
-    :path => "/player-challenge/avatar/:id/:style/:filename"
+  has_attached_file :avatar,
+                    :path => "public/system/player_challenge/:attachment/:id_partition/:style/:filename",
+                    :url => "/system/player_challenge/:attachment/:id_partition/:style/:filename"
+
+
+	#has_attached_file :avatar,
+  #  :storage => :s3,
+  #  :s3_credentials => "#{Rails.root}/config/amazon_s3.yml",
+  #  :path => "/player-challenge/avatar/:id/:style/:filename"
 
   def avatar_url
   	self.avatar.url if self.avatar.present?
