@@ -1,0 +1,10 @@
+<h3>Import Users</h3>
+
+<%= form_for @user, :url => "/users/post_import_from_csv", :html => {:method => :post} do |f| %>
+
+  <div>Upload Only CSV (Comma seperated) File<br />
+	<%= f.file_field :csv_file, :label => "CSV File" %>
+	<br>
+	<%= f.submit "Import CSV", :class => "btn btn-primary" %>
+	
+<% end %>

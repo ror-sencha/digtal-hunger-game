@@ -1,0 +1,43 @@
+<div class="span12" style = "float:left;">
+<ul class="nav navbar-nav">
+
+  <li><a href="javascript:void(0);">Challenges</a></li>
+
+	<li><a href="javascript:void(0);">Sort By</a></li>
+
+	<li><a href="javascript:void(0);">Search</a></li>
+
+	<li><a href="<%= new_user_path %>">Add User</a></li>
+</ul>
+
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>User Name</th>
+      <th>User Type</th>
+      <th>Registered</th>
+      <th>Email Address</th>
+    </tr>
+  </thead>
+  <tbody>
+  	<% @users.each do |user| %>
+    <tr>
+      <td>
+        <% if user.avatar.present? %>
+          <%= image_tag(user.avatar(:thumb)) %>
+        <% else %>
+          <%= image_tag("/assets/big.jpg", :width => "50", :height => "50") %>
+        <% end %>
+      </td>
+      <td><%= user.name %></td>
+      <td><%= user.status %></td>
+      <td><%= user.confirmed_at.present?? "Yes" : "No" %></td>
+      <td><%= user.email %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @users %>

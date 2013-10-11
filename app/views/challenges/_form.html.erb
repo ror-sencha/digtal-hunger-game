@@ -1,0 +1,52 @@
+<div style="margin-left:40%;">
+<%= form_for(@challenge) do |f| %>
+  <%= error_messages_for @challenge %>
+
+  <div>
+    <%= f.label :title, "Challenge Title" %><span style="margin-left:15%;"></span>
+    <%= f.text_field :title, :placeholder => "Title", :style => "width:50%;" %>
+  </div>
+  <br>
+
+  <div>
+    <%= f.label :start_date, "Challenge Start Date End Date" %>
+    <%= f.date_field :start_date %>
+    <%= f.date_field :end_date %>
+  </div>
+
+  <br>
+  
+  <div>
+    <%= f.label :description %><span style="margin-left:19%;"></span>
+    <%= f.text_area :description, :placeholder => "Description", :style => "height: 100px;width: 50%;"%>
+  </div>
+
+  <br>
+
+  <%= f.fields_for :document_challenge  do |dc| %>
+  <div>
+    <%= dc.label :avatar, "Document or Image Challenge" %>
+    <%= dc.file_field :avatar , :style => "display: inline;" %>
+  </div>
+  <br>
+  <% end %>
+
+  <%= f.fields_for :video_challenge do |vc| %>
+  <div>
+    <%= vc.label :avatar, "Video Challenge" %><span style="margin-left:14%;"></span>
+    <%= vc.file_field :avatar, :style => "display: inline;" %>
+  </div>
+    <br>
+  <% end %>
+
+  <div>
+    <%= f.label :is_published %><span style="margin-left:19%;"></span>
+    <%= f.check_box :is_published %>
+  </div>
+
+
+  <div style="float:right;margin-right:20%;">
+    <%= f.submit "Save Challenge", :class => "btn btn-primary" %>
+  </div>
+<% end %>
+</div>

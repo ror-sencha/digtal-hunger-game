@@ -1,0 +1,65 @@
+<h4> <%= @registration_email_template.name %> </h4>
+
+<%= form_for(@registration_email_template, :html => { :multipart => true }) do |f| %>
+  <%= error_messages_for @registration_email_template %>
+	<%= hidden_field_tag :email_template_id, @registration_email_template.id %>
+	<div>
+		<%= f.label :content %><br />
+		<%= f.text_area :content, :value => @registration_email_template.content, :class => "ckeditor" %>
+	</div>
+	<br>
+	<div style="float:left;margin-left:2%;"><%= f.submit "Save", :class => "btn btn-primary" %></div>
+<% end %>
+<div style="float:left;margin-left:1%;"><%= link_to "Send to All", send_registration_email_template_email_templates_path, :class => "btn btn-primary" %></div>
+
+<br><br>
+
+<h4> <%= @new_challenge_template.name %> </h4>
+
+<%= form_for(@new_challenge_template, :html => { :multipart => true }) do |f| %>
+  <%= error_messages_for @new_challenge_template %>
+  <%= hidden_field_tag :email_template_id, @new_challenge_template.id %>
+  <div>
+    <%= f.label :content %><br />
+    <%= f.text_area :content, :value => @new_challenge_template.content, :class => "ckeditor" %>
+  </div>
+  <br>
+  <div style="float:left;margin-left:2%;"><%= f.submit "Save", :class => "btn btn-primary" %></div>
+<% end %>
+<div style="float:left;margin-left:1%;"><%= link_to "Send to All", send_new_challenge_template_email_templates_path , :class => "btn btn-primary" %></div>
+
+<br><br>
+
+<h4> <%= @player_denied_email_template.name %> </h4>
+
+<%= form_for(@player_denied_email_template, :html => { :multipart => true }) do |f| %>
+  <%= error_messages_for @player_denied_email_template %>
+  <%= hidden_field_tag :email_template_id, @player_denied_email_template.id %>
+  <div>
+    <%= f.label :content %><br />
+    <%= f.text_area :content, :value => @player_denied_email_template.content, :class => "ckeditor" %>
+  </div>
+  <br>
+  <div style="float:left;margin-left:2%;"><%= f.submit "Save", :class => "btn btn-primary" %></div>
+<% end %>
+<div style="float:left;margin-left:1%;"><%= link_to "Send to All", send_player_denied_email_template_email_templates_path, :class => "btn btn-primary" %></div>
+
+
+<br><br>
+
+<h4> <%= @player_winner_email_template.name %> </h4>
+
+<%= form_for(@player_winner_email_template, :html => { :multipart => true }) do |f| %>
+  <%= error_messages_for @player_winner_email_template %>
+  <%= hidden_field_tag :email_template_id, @player_winner_email_template.id %>
+  <div>
+    <%= f.label :content %><br />
+    <%= f.text_area :content, :value => @player_winner_email_template.content, :class => "ckeditor" %>
+  </div>
+  <br>
+  <div style="float:left;margin-left:2%;"><%= f.submit "Save", :class => "btn btn-primary" %></div>
+<% end %>
+<div style="float:left;margin-left:1%;"><%= link_to "Send to All", send_player_winner_email_template_email_templates_path, :class => "btn btn-primary" %></div>
+<br><br>
+
+

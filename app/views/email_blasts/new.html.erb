@@ -1,0 +1,21 @@
+<h4> <%= @email_blasts.title %> </h4>
+<%= form_for @email_blasts, :url => {:controller => "email_blasts", :action => "create"}, :method => "POST" do |f| %>
+  <%= error_messages_for @email_blasts %>
+  <%= hidden_field_tag :email_blast_id, @email_blasts.id %>
+
+
+
+  <div><%= f.label :content %><br />
+  <%= f.text_area :content, :value => @email_blasts.content, :class => "ckeditor" %></div>
+	<br>
+  <div><%= f.submit "Save", :class => "btn" %></div>
+<% end %>
+<br>
+<%= form_tag send_email_blast_email_blasts_path, :method => 'POST' do %>
+	<div>
+		<%#= link_to "Send", send_email_blast_email_blasts_path, :method => "POST", :class => "btn btn-primary"  %>
+		   Select Group : <%= select_tag "user_group", options_for_select([["spectator", "spectator"], ["MD", "MD"], ["Judge", "Judge"], ["player", "player"], ["All User", "All User"]]), {:class =>"select_combobox" } %>
+
+     <%= submit_tag "Send", :name => nil, :class => "btn btn-primary" %>
+	</div>
+<% end %>

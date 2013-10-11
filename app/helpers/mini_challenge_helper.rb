@@ -1,0 +1,2 @@
+module MiniChallengeHelper
+end

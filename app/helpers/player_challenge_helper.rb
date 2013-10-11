@@ -1,0 +1,2 @@
+module PlayerChallengeHelper
+end

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HungerGame</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+  <body>
+    <%= render :partial => "/layouts/header" %>
+    
+    <% if current_user.present? && current_user.is_admin? %>
+
+      <div class="flash_main" style="margin-left: 15%;width: 70%;">
+        <% flash.each do |key, value| %>
+          <div class="<%= flash_class(key) %> fade in fadeout custome_flash_message">
+            <a href="#" data-dismiss="alert" class="flash-close">x</a>
+            <%= value %>
+          </div>
+        <% end %>
+      </div>
+      
+      <div class="span12">
+        <%= render :partial => "/home/dashboard_header" %>
+      </div>
+      
+    <% end %>
+    <br><br><br>
+    <div class="container">
+      <%= yield %>
+    </div>
+  </body>
+</html>

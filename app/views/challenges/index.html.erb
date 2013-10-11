@@ -1,0 +1,39 @@
+<h3>Challenges List </h3>
+
+<%= link_to "Create Challenge", new_challenge_path %> | 
+<%= link_to "Create Mini Challenge", new_mini_challenge_path %>
+<br>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Challenge Type</th>
+      <th>Challenge Title</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Public Published</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  	<% @challenges.each do |challenge| %>
+    <tr>
+      <td>
+        <% if challenge.is_video_challenge? %>
+          <%= link_to "Video Challenge", edit_challenge_path(challenge) %>
+        <% elsif challenge.document_challenge.present? && challenge.document_challenge.is_image_document? %>
+            <%= link_to "Image Challenge", edit_challenge_path(challenge) %>
+        <% else %>
+          <%= link_to "Document Challenge", edit_challenge_path(challenge) %>
+        <% end %>
+        <%#= challenge.is_video_challenge? ? "Video Challenge" : "Document Challenge" %>
+      </td>
+      <td><%= challenge.title %></td>
+      <td><%= challenge.start_date.strftime("%d/%m/%Y") %></td>
+      <td><%= challenge.end_date.strftime("%d/%m/%Y") %></td>
+      <td><%= challenge.is_published %></td>
+      <td><%= link_to "View Challenge", challenge_path(challenge) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @challenges %>

@@ -1,0 +1,36 @@
+<h3>Add Mini Challenges  </h3>
+<div style="margin-left:30%;">
+<%= nested_form_for(@mini_challenge, :html => { :multipart => true }) do |f| %>
+  <%= error_messages_for @mini_challenge %>
+
+  <div>
+  	<%= f.label :title, "Challenge Title" %>
+  	<span style="margin-left:11%;"></span>
+		<%= f.text_field :title, :placeholder => "Title" %>
+	</div>
+	
+	<br>
+
+  <div>
+  	<%= f.label :question, "Multiple Choice Question" %>
+  	<span style="margin-left:2%;"></span>
+  	<%= f.text_field :question, :placeholder => "Question" %>
+  </div>
+	<br>
+
+
+	<%= f.fields_for :challenge_options  do |co| %>
+
+	<div>
+    <span style="margin-left:17%;"></span>
+    <%= co.label :option, "Option :" %>
+		
+  	<%= co.text_field :option %>
+  	<%= co.check_box :answer %> Correct? 
+	</div>
+<% end %>
+<%#= f.link_to_add "Add More Options", :challenge_options  %>
+	<br>
+  <div><%= f.submit "Save Challenge", :class => "btn btn-primary", :style => "float:right;margin-right:40%;" %></div>
+<% end %>
+</div>

@@ -1,0 +1,22 @@
+<h3>Mini Challenges List </h3>
+
+<%= link_to "Create Challenge", new_challenge_path %> | 
+<%= link_to "Create Mini Challenge", new_mini_challenge_path %>
+<br>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Challenge Title</th>
+      <th>Challenge Question</th>
+    </tr>
+  </thead>
+  <tbody>
+  	<% @mini_challenges.each do |challenge| %>
+    <tr>
+      <td><%= challenge.title %></td>
+      <td><%= challenge.question %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @mini_challenges %>

@@ -1,0 +1,52 @@
+<% if current_user.is_admin? %>
+  <h3>Users List </h3>
+  <div class="span12" style = "float:left;">
+    <ul class="nav navbar-nav">
+    	<li><a href="<%= new_user_path %>">Add User</a></li>
+    </ul>
+  </div>
+  
+  <br><br>
+  <div style="float:left;">
+    <%= form_tag users_path, :method => 'get' do %>
+      <p>
+        <%= text_field_tag :search, params[:search], :placeholder => "search by username " %>
+        <%= submit_tag "Search", :name => nil %>
+      </p>
+    <% end %>
+  </div>
+  <br><br>
+  <% if @users.present? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>User Name</th>
+        <th>User Type</th>
+        <th>Registered</th>
+        <th>Email Address</th>
+      </tr>
+    </thead>
+    <tbody>
+    	<% @users.each do |user| %>
+      <tr>
+        <td>
+          <% if user.avatar.present? %>
+            <%= link_to image_tag(user.avatar(:thumb)), edit_user_path(user) %>
+          <% else %>
+            <%= link_to image_tag("/assets/big.jpg", :width => "50", :height => "50"), edit_user_path(user) %>
+          <% end %>
+        </td>
+        <td><%= user.name %></td>
+        <td><%= user.status %></td>
+        <td><%= user.confirmed_at.present?? "Yes" : "No" %></td>
+        <td><%= user.email %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @users %>
+  <% else %>
+  No Users Present Yet!
+  <% end %>
+<% end %>

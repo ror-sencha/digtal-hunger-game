@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  challenge_id: 1
+  user_id: 1
+  date_submitted: 2013-09-29
+  youtube_link: MyString
+  make_public: false
+  judge_can_view: false
+
+two:
+  challenge_id: 1
+  user_id: 1
+  date_submitted: 2013-09-29
+  youtube_link: MyString
+  make_public: false
+  judge_can_view: false

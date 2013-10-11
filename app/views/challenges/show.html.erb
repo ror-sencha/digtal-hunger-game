@@ -1,0 +1,48 @@
+Challenge Title : <h3><%= @challenge.title %></h3>
+
+<table class="challenge_show_page">
+	<thead>
+		<tr>
+		<th>Player Name</th>
+		<th>Date Submitted</th>
+		<th>Paste YouTube link</th>
+		<th>Media</th>
+		<th>Make Public</th>
+		<th>Judges can view ?</th>
+		<th></th>
+	</tr>
+	</thead>
+	<tbody>
+		
+		<% @player_challenges.each do |player|  %>
+			<%= form_for player, :url => {:controller => "player_challenges", :action => "update"} do |f|  %>
+				<tr>
+					<td><%= User.find(player.user_id).name %></td>
+					<td><%= Time.now.to_date %></td>				
+					<td><%= f.text_field :youtube_link %></td>
+					<% if f.object.avatar.present? && f.object.avatar_content_type.to_s == "image/png" or  f.object.avatar_content_type.to_s == "image/jpg" or f.object.avatar_content_type.to_s == "image/jpeg" %>
+						<td><a class="cbox" href="<%= f.object.avatar.url %>" title="Image.">Image</a></td>
+					<% else %>
+						<td></td>
+					<% end %>
+					<td><%= f.check_box :make_public %></td>
+					<td><%= f.check_box :judge_can_view %></td>
+				</tr>
+				<tr class="borderline">
+					<td colspan="6">	
+						 <strong> Description </strong> : <%= f.object.description %>
+						<%# comments = player.comments.build unless player.comments.present? %>
+						<%#= f.fields_for :comments do |c| %>
+							
+							<%#= c.hidden_field :challenge_id, :value => @challenge.id %>
+							<%#= c.text_field :description, :placeholder => "description", :style => "width:100%;" %>
+							<%#= c.file_field :avatar %>
+
+						<%# end %>
+						<%= f.submit "Save", :class => "btn btn-primary", :style => "float:right;" %>
+					</td>
+				</tr>
+			<% end %>
+		<% end %>
+	</tbody>
+</table>

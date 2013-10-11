@@ -1,0 +1,18 @@
+<div style="text-align:center;">
+<h3>Add Video URL </h3>
+<%= form_for(@video_page) do |f| %>
+
+  <div><%= f.label :video_path %><br />
+  <%= f.text_field :video_path, :placeholder => "Video Path" %></div>
+  Hint : www.youtube.com/embed/wRNUsbNyFKs
+
+  <br><br>
+
+
+  <div><%= f.submit "Save", :class => "btn btn-primary" %></div>
+<% end %>
+<br>
+<% if VideoPage.first.present? %>
+<iframe width="560" height="315" src="//<%= VideoPage.first.video_path %>" frameborder="0" allowfullscreen></iframe>
+<% end %>
+</div>

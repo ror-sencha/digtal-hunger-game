@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  option: MyString
+  mini_challenge_id: 1
+  answer: false
+
+two:
+  option: MyString
+  mini_challenge_id: 1
+  answer: false
