@@ -1,15 +1,10 @@
 source 'https://rubygems.org'
-ruby "2.0.0"
+#ruby "2.0.0"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
 # Use mysql as the database for Active Record
-group :development do
 gem 'mysql2'
-end
-group :production do
-	gem 'pg'
-end
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -58,7 +53,5 @@ gem 'mailchimp', :path => 'my_gems/mailchimp-gem'
 gem 'mandrill_mailer', :path => 'my_gems/mandrill_mailer'
 gem "nested_form"
 gem "ckeditor"
-gem 'aws-s3', :require => 'aws/s3'
-gem 'aws-sdk'
 gem 'roo'
 gem "rack-cors", :require => "rack/cors"
