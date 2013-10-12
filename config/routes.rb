@@ -18,7 +18,7 @@ HungerGame::Application.routes.draw do
    root 'home#dashboard'
    get '/login' => 'home#login'
 
-  resources :users, :only => [:new, :create, :index, :edit, :update] do
+  resources :users do
     collection do
       get 'import_users'
       post 'post_import_from_csv'  

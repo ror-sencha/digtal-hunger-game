@@ -135,6 +135,7 @@ class User < ActiveRecord::Base
         user.password = "aaxbbxccx11x22x33" #row["password"]
         user.password_confirmation = "aaxbbxccx11x22x33" #row["password"]
         user.save
+        test = HungerMailer.invitation_for_signup(user.email, user.name).deliver if user.save
         user
       end
     end
