@@ -5,20 +5,29 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def create
     @user = User.new(user_params)
+    @import_user = User.find_by_email(params[:user][:email])
     if params[:skills].present?
       params[:skills].split(",").each do |skill| 
         @user.user_skills.build(:skill_id => skill)
+        @import_user.user_skills.build(:skill_id => skill) if @import_user.present?
       end
     end
     if params["send_email_to_md"].present? && params["send_email_to_md"].to_s == "true"
       HungerMailer.email_send_to_md(@user.email,"#{DOMAIN_CONFIG}/").deliver
     end
-
-    @user.status = "spectator"
-    if @user.save
-      @auth_token = @user.create_token
+    
+    if @import_user.present?
+      @import_user.update_attributes(user_params)
+      if @import_user.save
+        @user = @import_user
+      end
     else
-      render_json({errors: @user.full_errors, status: 404}.to_json)
+      @user.status = "spectator"
+      if @user.save
+        @auth_token = @user.create_token
+      else
+        render_json({errors: @user.full_errors, status: 404}.to_json)
+      end
     end
   end
 

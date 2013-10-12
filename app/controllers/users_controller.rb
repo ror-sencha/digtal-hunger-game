@@ -5,11 +5,11 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, :except => [:change_password, :reset_password]
 
   def index
-      if params[:search].present?
-        @users = User.search(params[:search]).page(params[:page]).per(10)
-      else
-        @users = User.page(params[:page]).per(10)
-      end
+    if params[:search].present?
+      @users = User.search(params[:search]).page(params[:page]).per(10)
+    else
+      @users = User.page(params[:page]).per(10)
+    end
   end
 
   def new
