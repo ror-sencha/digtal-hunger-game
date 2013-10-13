@@ -174,9 +174,15 @@ class Api::V1::UsersController < Api::V1::BaseController
   def support_to_player
     supporter_id = params[:support]
     if supporter_id.present?
+      @supporter = User.find(supporter_id)
       @user = @current_user
-      if @user.update_attributes(user_params)
+      @user.support = supporter_id
+      if @user.save
         ## add point (10) for support
+        support_user = @current_user.support_points.build
+        support_user.point = 10
+        support_user.support_id = supporter_id
+        support_user.save
         render_json({message: "support added!", status: 200}.to_json)
       else
         render_json({errors: @user.full_errors, status: 404}.to_json)

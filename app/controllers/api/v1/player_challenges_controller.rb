@@ -8,15 +8,12 @@ class Api::V1::PlayerChallengesController < Api::V1::BaseController
       player_challenge_id = params[:player_challenge][:challenge_id]
       player_user_id = params[:player_challenge][:user_id]
 
-      logger.warn("=====#{PlayerChallenge.find_by_challenge_id_and_user_id(player_challenge_id, player_user_id).present?}======")
       unless PlayerChallenge.find_by_user_id_and_challenge_id(player_user_id,player_challenge_id).present?
         @player_challenge = PlayerChallenge.new(player_challenge_params)
         @player_challenge.avatar = params[:avatar]
         @player_challenge.date_submitted = Time.now.to_date
         if @player_challenge.save
-          logger.warn("======#{@player_challenge.challenge.created_at.to_date}====#{Time.now.to_date}===============")
           if @player_challenge.challenge.created_at.to_date == Time.now.to_date
-            logger.warn("==========1=====")
             points = @current_user.points
             day_of_post_point = points + 25
             @current_user.update_attributes(:points => day_of_post_point)
@@ -25,7 +22,6 @@ class Api::V1::PlayerChallengesController < Api::V1::BaseController
             ch_point.point = 25
             ch_point.save
           elsif @player_challenge.challenge.created_at.to_date == Time.now.to_date - 1.day
-            logger.warn("==========2=====")
             points = @current_user.points
             day_of_post_point = points + 21
             @current_user.update_attributes(:points => day_of_post_point)            
@@ -34,7 +30,6 @@ class Api::V1::PlayerChallengesController < Api::V1::BaseController
             ch_point.point = 21
             ch_point.save
           elsif @player_challenge.challenge.created_at.to_date == Time.now.to_date - 2.day
-            logger.warn("==========3=====")
             points = @current_user.points
             day_of_post_point = points + 17
             @current_user.update_attributes(:points => day_of_post_point)            
@@ -43,7 +38,6 @@ class Api::V1::PlayerChallengesController < Api::V1::BaseController
             ch_point.point = 17
             ch_point.save
           elsif @player_challenge.challenge.created_at.to_date == Time.now.to_date - 3.day
-            logger.warn("==========4=====")
             points = @current_user.points
             day_of_post_point = points + 13
             @current_user.update_attributes(:points => day_of_post_point)            
@@ -52,7 +46,6 @@ class Api::V1::PlayerChallengesController < Api::V1::BaseController
             ch_point.point = 13
             ch_point.save
           elsif @player_challenge.challenge.created_at.to_date == Time.now.to_date - 4.day
-            logger.warn("==========5=====")
             points = @current_user.points
             day_of_post_point = points + 9
             @current_user.update_attributes(:points => day_of_post_point)            
@@ -61,7 +54,6 @@ class Api::V1::PlayerChallengesController < Api::V1::BaseController
             ch_point.point = 9
             ch_point.save
           elsif @player_challenge.challenge.created_at.to_date == Time.now.to_date - 5.day
-            logger.warn("==========6=====")
             points = @current_user.points
             day_of_post_point = points + 5
             @current_user.update_attributes(:points => day_of_post_point)            
@@ -70,7 +62,6 @@ class Api::V1::PlayerChallengesController < Api::V1::BaseController
             ch_point.point = 5
             ch_point.save
           else
-            logger.warn("==========7=====")
             points = @current_user.points
             day_of_post_point = points + 1
             @current_user.update_attributes(:points => day_of_post_point)            

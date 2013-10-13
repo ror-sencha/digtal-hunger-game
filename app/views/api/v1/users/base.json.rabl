@@ -9,3 +9,9 @@ end
 node :challenges_point do |c|
 	c.challenges_points.map(&:point).sum
 end
+node :social_media_point do |c|
+	c.social_media_points.map(&:point).sum
+end
+node :support_point do |c|
+	c.support_points.map(&:point).sum
+end
