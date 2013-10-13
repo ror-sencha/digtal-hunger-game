@@ -10,14 +10,14 @@ class VideoPagesController < ApplicationController
 		if VideoPage.count.to_i == 0
 			@video_page = VideoPage.new(video_params)
 			if @video_page.save
-				redirect_to root_path, :notice => "Successfully Added Video"
+				redirect_to users_path, :notice => "Successfully Added Video"
 			else
 				render :actio => "new"
 			end
 		else
 			@video_page = VideoPage.first
 			@video_page.update_attributes(video_params)
-			redirect_to root_path, :notice => "Successfully Added Video"
+			redirect_to users_path, :notice => "Successfully Added Video"
 		end
 
 	end

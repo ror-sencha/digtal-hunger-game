@@ -8,7 +8,7 @@ class HomeController < ApplicationController
   	unless current_user.present?
   		redirect_to new_users_session_path
   	else
-  		redirect_to root_path
+  		redirect_to users_path
   	end
   end
 

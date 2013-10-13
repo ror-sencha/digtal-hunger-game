@@ -10,7 +10,7 @@ class EmailBlastsController < ApplicationController
   def create
   	@email_blast = EmailBlast.find(params[:email_blast_id])
 		if @email_blast.update(email_blast_params)
-			redirect_to root_path
+			redirect_to users_path
 		else
 			render action: 'new'
 		end
@@ -52,7 +52,7 @@ class EmailBlastsController < ApplicationController
         end
       end            
     end
-    redirect_to root_path, :notice => "Successfully send email blast."
+    redirect_to users_path, :notice => "Successfully send email blast."
   end
 
 

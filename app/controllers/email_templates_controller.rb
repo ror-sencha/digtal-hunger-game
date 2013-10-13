@@ -57,7 +57,7 @@ class EmailTemplatesController < ApplicationController
 	def create
 		@email_template = EmailTemplate.find(params[:email_template_id])
 		if @email_template.update(email_template_params)
-			redirect_to root_path
+			redirect_to users_path
 		else
 			render action: 'new'
 		end
@@ -68,7 +68,7 @@ class EmailTemplatesController < ApplicationController
 
 	def update
     if @email_template.update(email_template_params)
-      redirect_to root_path, notice: 'Mini challenge was successfully updated.'
+      redirect_to users_path, notice: 'Mini challenge was successfully updated.'
     else
       render action: 'edit'
     end
@@ -79,7 +79,7 @@ class EmailTemplatesController < ApplicationController
 
 	def destroy
 		@email_template.destroy
-    redirect_to root_path, notice: 'destroy!'
+    redirect_to users_path, notice: 'destroy!'
 	end
 
 	protected

@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     @user.confirmation_token = nil
     @user.confirmed_at  = Time.now
   	if @user.save
-  		redirect_to root_path, :notice => "Successfully Created!"
+  		redirect_to users_path, :notice => "Successfully Created!"
   	else
   		render "new"
   	end

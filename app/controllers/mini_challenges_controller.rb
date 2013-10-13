@@ -12,7 +12,7 @@ class MiniChallengesController < ApplicationController
 		@mini_challenge = current_user.mini_challenges.build(mini_challenge_params)
 		if @mini_challenge.valid?
 			@mini_challenge.save
-			redirect_to root_path, :notice => "Mini challenge successfully created."
+			redirect_to users_path, :notice => "Mini challenge successfully created."
 		else
 			render :action => "new"
 		end

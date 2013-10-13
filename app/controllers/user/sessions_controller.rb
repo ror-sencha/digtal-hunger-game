@@ -8,7 +8,7 @@ class User::SessionsController < Devise::SessionsController
     #if resource.is_admin?
     #  dashboard_path
     #else
-      root_path
+      users_path
     #end
   end
 
