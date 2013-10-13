@@ -18,11 +18,17 @@
 					<% if p.user.present? && p.user.avatar.present? %>
 					<%= link_to image_tag(p.user.avatar.url(:thumb)), "javascript:void(0);" %>
 					<% else %>
-					<%= link_to image_tag("/assets/big.jpg"), "javascript:void(0);" %>
+					<%= link_to image_tag("/assets/big.jpg", :width => "50", :height => "50"), "javascript:void(0);" %>
 					<% end %>
 				</td>
 
-				<td>Yes/No</td>
+				<td>
+					<% if p.is_winner == true %>
+						<%= link_to "Remove Winner", declare_winner_player_challenges_path(p), :method => "POST" %>
+					<% else %>
+					<%= link_to "Declare Winner", declare_winner_player_challenges_path(p), :method => "POST" %>
+					<% end %>
+				</td>
 				<% if p.user.md_id.present? %>
 				<td>
 					<% usmd = User.find(p.user.md_id) %>

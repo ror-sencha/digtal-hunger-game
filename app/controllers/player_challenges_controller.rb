@@ -12,6 +12,22 @@ class PlayerChallengesController < ApplicationController
 		end
 	end
 
+	def declare_winner
+		if params[:id].present?
+			@player = PlayerChallenge.find(params[:id])
+			if @player.is_winner == true
+				@player.is_winner = false
+			else
+				@player.is_winner = true
+			end
+			@player.save
+			msg = @player.is_winner == true ? "Winner" : "Not Winner"
+			redirect_to :back, :notice => "#{@player.user.name} is  #{msg}! for #{@player.challenge.title} challenge"
+		else
+			redirect_to :back, :notice => "Error..!"
+		end			
+	end
+
 
 	protected
 

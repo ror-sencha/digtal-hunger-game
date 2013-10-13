@@ -45,7 +45,8 @@ HungerGame::Application.routes.draw do
       post 'send_email_blast'
     end
    end
-   resources :player_challenges
+   resources :player_challenges, :only => [:create, :update]
+   post '/declare_winner/:id' => 'player_challenges#declare_winner', :as => :declare_winner_player_challenges
    get  '/reset/password'                  =>  'users#change_password',                     :as   =>  :change_password
    #match '/reset_password(/:token)'          =>  'users#reset_password',                      :as   =>  :post_reset_password
 
