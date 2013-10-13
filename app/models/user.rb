@@ -35,9 +35,9 @@ class User < ActiveRecord::Base
   has_many :mini_challenge_answers
   has_many :social_media_points
   has_many :judge_points
-  has_many :player_challenge
+  has_many :player_challenges
   has_many :minichallenge_points
-
+  has_many :challenges_points
   accepts_nested_attributes_for :user_skills
   ## Scopes
 

@@ -20,7 +20,6 @@ class Api::V1::ChallengesController < Api::V1::BaseController
   			@challenge.challenge_likes.build(:user_id => @current_user.id )
   			@challenge.recent_activities.build()
   			@challenge.save
-
   			render_json({message: "Point added !", status: 200}.to_json)
   		end
   	else
