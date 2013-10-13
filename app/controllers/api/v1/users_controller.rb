@@ -177,6 +177,7 @@ class Api::V1::UsersController < Api::V1::BaseController
       @supporter = User.find(supporter_id)
       @user = @current_user
       @user.support = supporter_id
+      @user.points = @user.points + 10
       if @user.save
         ## add point (10) for support
         support_user = @current_user.support_points.build
