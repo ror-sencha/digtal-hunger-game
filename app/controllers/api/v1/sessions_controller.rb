@@ -11,6 +11,9 @@ class Api::V1::SessionsController < Api::V1::BaseController
           points = @user.points.present? ? @user.points : 0
           login_points = points + 5
           @user.update_attributes(:points => login_points)
+          lg_point = @user.login_points.build
+          lg_point.point = 5
+          lg_point.save
         end
       end
       sign_in_count = @user.sign_in_count + 1

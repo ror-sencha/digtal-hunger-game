@@ -39,6 +39,7 @@ class User < ActiveRecord::Base
   has_many :minichallenge_points
   has_many :challenges_points
   has_many :support_points
+  has_many :login_points
   accepts_nested_attributes_for :user_skills
   ## Scopes
 

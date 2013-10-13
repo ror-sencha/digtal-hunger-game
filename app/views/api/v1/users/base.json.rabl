@@ -15,3 +15,9 @@ end
 node :support_point do |c|
 	c.support_points.map(&:point).sum
 end
+node :minichallenge_point do |c|
+	c.minichallenge_points.map(&:points).sum
+end
+node :login_point do |c|
+ c.login_points.map(&:point).sum
+end
