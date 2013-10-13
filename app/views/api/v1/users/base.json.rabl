@@ -6,3 +6,6 @@ end
 node :skills do |c|
   c.user_skills.map(&:skill).map{|p| {"id" => p.id, "name" => p.name}}
 end
+node :challenges_point do |c|
+	c.challenges_points.map(&:point).sum
+end
