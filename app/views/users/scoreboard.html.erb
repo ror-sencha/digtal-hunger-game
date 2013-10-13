@@ -14,7 +14,14 @@
 	<tbody>
 		<% @player_challenges.each do |p| %>
 			<tr>
-				<td><%= link_to image_tag(p.user.avatar.url(:thumb)), "javascript:void(0);" %></td>
+				<td>
+					<% if p.user.present? && p.user.avatar.present? %>
+					<%= link_to image_tag(p.user.avatar.url(:thumb)), "javascript:void(0);" %>
+					<% else %>
+					<%= link_to image_tag("/assets/big.jpg"), "javascript:void(0);" %>
+					<% end %>
+				</td>
+
 				<td>Yes/No</td>
 				<% if p.user.md_id.present? %>
 				<td>

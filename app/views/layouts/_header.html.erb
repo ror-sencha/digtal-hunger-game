@@ -1,6 +1,6 @@
 <div style="width:100%">
 	<div style="margin-left:30%;float:left;">
-		<%= link_to image_tag("/assets/logo.png", :width => "500", :height => "100"), root_path %>
+		<%= link_to image_tag("/assets/logo.png", :width => "500", :height => "100"), users_path %>
 	</div>
 	<% if current_user.present? && current_user.is_admin? %>
 	<div style="float:left;">
