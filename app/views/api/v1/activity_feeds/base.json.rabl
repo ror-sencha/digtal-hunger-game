@@ -1,10 +1,10 @@
 object @recent_activity
 attributes :message, :is_like, :user_id, :created_at, :liked_by
 node :profile_image do |c|
-	c.user.avatar.url if c.user.avatar.present?
+	c.user.avatar_url if c.user.avatar.present?
 end
 node :avatar_image do |c|
-	c.avatar.url if c.avatar.present?
+	c.avatar_url if c.avatar.present?
 end
 node :user_name do |c|
 	c.user.fullname
