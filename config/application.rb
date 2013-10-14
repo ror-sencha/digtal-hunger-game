@@ -27,7 +27,7 @@ module HungerGame
         resource '*', :headers => :any, :methods => [:get, :post, :put, :delete,:options]
       end
     end
-
+    config.assets.enabled = true
     config.assets.paths << "#{Rails.root.to_s}/app/assets/fonts"
     config.assets.precompile << Proc.new do |path|
       if ['login.js', 'application.js', 'login.css', 'application.css'].include?(path)
