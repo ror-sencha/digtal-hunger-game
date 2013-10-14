@@ -21,3 +21,6 @@ end
 node :login_point do |c|
  c.login_points.map(&:point).sum
 end
+node :skills_endorse do |c|
+	UserEndorse.where("endorse_id = ?", c.id).map(&:skill_id)
+end
