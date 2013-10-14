@@ -9,3 +9,16 @@ end
 node :user_last_name do |r|
   r.user.last_name
 end
+node :endorsement_name do |r|
+	User.find(r.comment_id).fullname if r.comment_id.present?
+end
+node :endorsement_image do |r|
+	if r.comment_id.present?
+	u = User.find(r.comment_id) 
+	if u.avatar.present?
+		u.avatar_url
+	else
+		"#{DOMAIN_CONFIG}/assets/male.png"
+	end 
+	end
+end

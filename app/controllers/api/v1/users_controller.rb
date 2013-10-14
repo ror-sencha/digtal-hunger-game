@@ -85,15 +85,14 @@ class Api::V1::UsersController < Api::V1::BaseController
     endorse_id = params[:endorse][:endorse_id]
     @user = User.find(user_id)
     @endorse = User.find(endorse_id)
-    @skill = Skill.where("id = ?", skill_id)
-    logger.warn("=======test===========")
+    @skill = Skill.find(skill_id)
     if @endorse.is_player?
       if user_id.present? && skill_id.present? && endorse_id.present?
         old_ue = UserEndorse.where("user_id = ? and skill_id = ? and endorse_id = ?", user_id, skill_id, endorse_id)
         unless old_ue.present? 
           u = UserEndorse.new(user_endorse)
           u.save
-          RecentActivity.create(:user_id => endorse_id, :rc_type => "endorse", :message => "endorses #{@endorse.name} for #{@skill.name} Skills")
+          RecentActivity.create(:comment_id => user_id, :user_id => endorse_id, :rc_type => "endorse", :message => "endorses #{@endorse.name} for #{@skill.name} Skill")
           render_json({message: "Successfully Endorse", status: 200}.to_json)
         else
           render_json({message: "Already Endorse!", status: 200}.to_json)
