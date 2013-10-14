@@ -16,6 +16,6 @@ class PlayerChallenge < ActiveRecord::Base
   #  :path => "/player-challenge/avatar/:id/:style/:filename"
 
   def avatar_url
-  	self.avatar.url if self.avatar.present?
+    "#{DOMAIN_CONFIG}/#{self.avatar.url}" if self.avatar.present?
   end
 end

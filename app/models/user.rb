@@ -82,9 +82,8 @@ class User < ActiveRecord::Base
   end
 
   def avatar_url
-    #{}"#{DOMAIN_CONFIG}#{self.avatar.url}"
     if self.avatar_file_name.present?
-      self.avatar.url
+      "#{DOMAIN_CONFIG}/#{self.avatar.url}"
     else
       "#{DOMAIN_CONFIG}/assets/male.png"
     end

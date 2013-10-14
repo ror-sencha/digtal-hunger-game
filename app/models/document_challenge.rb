@@ -15,8 +15,8 @@ class DocumentChallenge < ActiveRecord::Base
   end
 
   def document_challenge_avatar
-    #{}"#{DOMAIN_CONFIG}#{
-    self.avatar.url
+    #self.avatar.url
+    "#{DOMAIN_CONFIG}/#{self.avatar.url}"
   end
 
 end
