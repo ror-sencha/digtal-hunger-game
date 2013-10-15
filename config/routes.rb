@@ -27,7 +27,8 @@ HungerGame::Application.routes.draw do
     end
   end
 
-   resources :challenges
+   resources :challenges, :except => [:show] 
+   get '/challenges/show/:id'  => "challenges#show", :as => :show_challenge
    resources :mini_challenges
    resources :password_resets
    resources :email_templates do
