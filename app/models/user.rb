@@ -41,6 +41,7 @@ class User < ActiveRecord::Base
   has_many :support_points
   has_many :login_points
   has_many :endorses
+  has_many :activityfeed_likepoints
   accepts_nested_attributes_for :user_skills
   ## Scopes
 

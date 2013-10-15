@@ -15,7 +15,8 @@ class PlayerChallenge < ActiveRecord::Base
   #  :s3_credentials => "#{Rails.root}/config/amazon_s3.yml",
   #  :path => "/player-challenge/avatar/:id/:style/:filename"
 
-  def avatar_url
+  def post_url
     "#{DOMAIN_CONFIG}/#{self.avatar.url}" if self.avatar.present?
   end
+
 end

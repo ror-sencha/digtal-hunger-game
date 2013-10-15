@@ -26,6 +26,7 @@ class Challenge < ActiveRecord::Base
   end
   
   def pchallenge(tkn, challenge)
+    puts("==#{tkn.inspect}========#{challenge.inspect}===========")
     user = User.find(tkn.id)
     cha1 = Challenge.find(challenge)
     if cha1.player_challenges.find_by_user_id(user.id).present?

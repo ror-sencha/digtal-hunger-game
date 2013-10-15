@@ -4,9 +4,8 @@ class Api::V1::ChallengesController < Api::V1::BaseController
   skip_before_action :authentication_user_with_authentication_token, :only => [:index]
 
   def index
+    @user =  User.find(params[:user_id]) if params[:user_id].present? 
     @challenges = Challenge.where("is_published = ?", true)
-    @user =  User.find(params[:user_id])
-    @user
   end
 
   def challenge_like

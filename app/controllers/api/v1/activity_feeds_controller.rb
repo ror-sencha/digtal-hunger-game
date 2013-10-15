@@ -18,19 +18,35 @@ class Api::V1::ActivityFeedsController < Api::V1::BaseController
 
   def like_n_dislike_activity_feed
   	@activty_feed = ActivityFeed.find(params[:activity_feed_id])
-  	if @activty_feed.present?
-      if @activty_feed.is_like == true
-  		  @activty_feed.is_like = false
-        msg = "Unliked!"
-      else
-        @activty_feed.is_like = true
+    like_or_dislike = params[:like_or_dislike]
+    if @activty_feed.present? && like_or_dislike.present? 
+     # @aflp = ActivityfeedLikepoint.where("activity_feed_id = ? && user_id = ?", @activty_feed.id, @current_user.id)
+     @aflp = ActivityfeedLikepoint.find_by_activity_feed_id_and_user_id(@activty_feed.id, @current_user.id)
+      unless @aflp.present?
+        aflikepoint = @current_user.activityfeed_likepoints.build 
+        aflikepoint.point = 5
+        aflikepoint.activity_feed_id = @activty_feed.id
+        aflikepoint.is_like = "true"
         msg = "Liked!"
+        aflikepoint.save
+        cu_point = @current_user.points + 5
+        @current_user.update_attributes(:points => cu_point)
+        render_json({message: "#{msg}", status: 200}.to_json)
+      else
+        if like_or_dislike == "true"
+          @aflp.is_like = true
+          @aflp.point = 5
+          @aflp.save
+          msg = "Liked!"
+        else
+          @aflp.update_attributes(:is_like => false, :point => 0)
+          msg = "Unliked!"
+        end
+        render_json({message: "#{msg}", status: 200}.to_json)
       end
-  		@activty_feed.save
-  		render_json({message: "#{msg}", status: 200}.to_json)
-  	else
-  		render_json({errors: "Something is wrong..", status: 404}.to_json)
-  	end
+    else
+      render_json({errors: "Something is wrong..", status: 404}.to_json)
+    end
   end
 
   def comment_on_activity_feed

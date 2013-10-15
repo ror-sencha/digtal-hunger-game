@@ -1,7 +1,7 @@
 class Api::V1::UsersController < Api::V1::BaseController
 
 
-  skip_before_action :authentication_user_with_authentication_token, :only => [:create, :forget_password, :search, :get_profile, :md_user_type_list]
+  skip_before_action :authentication_user_with_authentication_token, :only => [:create, :forget_password, :search, :md_user_type_list]
 
   def create
     @user = User.new(user_params)
@@ -58,6 +58,9 @@ class Api::V1::UsersController < Api::V1::BaseController
     if params[:user_id].present?
       @user = User.find(params[:user_id])
       @recent_activity = @user.recent_activities
+      @player_challenges = @user.player_challenges
+      logger.warn("=====#{@current_user.inspect}=============")
+      @cuser = @current_user
     else
       render_json({errors: "Opps something is missing. please pass user_id.", status: 404}.to_json)      
     end

@@ -9,6 +9,9 @@ end
 node :user_name do |c|
 	c.user.fullname
 end
+node :status do |c|
+	c.user.status
+end
 node :activity_id do |c|
 	c.id
 end

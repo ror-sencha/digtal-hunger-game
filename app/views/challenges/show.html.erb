@@ -27,6 +27,7 @@ Challenge Title : <h3><%= @challenge.title %></h3>
 					<% end %>
 					<td><%= f.check_box :make_public %></td>
 					<td><%= f.check_box :judge_can_view %></td>
+					<%= f.hidden_field :player_challenge_id, :value => player.id %>
 				</tr>
 				<tr class="borderline">
 					<td colspan="6">	

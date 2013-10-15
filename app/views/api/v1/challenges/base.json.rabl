@@ -3,11 +3,9 @@ attributes :id, :title, :start_date, :end_date, :description, :is_published, :cr
 node :challenge_id do |c|
 	c.id
 end
-
 node :posted do |c|
-	c.pchallenge(@user, c.id)
+	c.pchallenge(@user, c.id) if @user.present?
 end
-
 child :document_challenge => "document_challenge" do |d|
   attribute :document_challenge_avatar
 end

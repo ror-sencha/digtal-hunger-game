@@ -6,3 +6,21 @@ end
 node :username do |c|
 	c.fullname
 end
+node :challenges_point do |c|
+	c.challenges_points.map(&:point).sum
+end
+node :social_media_point do |c|
+	c.social_media_points.map(&:point).sum
+end
+node :support_point do |c|
+	c.support_points.map(&:point).sum
+end
+node :minichallenge_point do |c|
+	c.minichallenge_points.map(&:points).sum
+end
+node :login_point do |c|
+ c.login_points.map(&:point).sum
+end
+node :like_and_dislike_point do |c|
+ c.activityfeed_likepoints.map(&:point).sum
+end
