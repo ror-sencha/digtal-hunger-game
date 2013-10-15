@@ -31,7 +31,7 @@
       <td><%= challenge.start_date.strftime("%d/%m/%Y") %></td>
       <td><%= challenge.end_date.strftime("%d/%m/%Y") %></td>
       <td><%= challenge.is_published %></td>
-      <td><%= link_to "View Challenge", challenge_path(challenge) %></td>
+      <td><%= link_to "View Challenge", show_challenge_path(challenge),'data-no-turbolink' => false %></td>
     </tr>
     <% end %>
   </tbody>

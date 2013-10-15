@@ -15,7 +15,7 @@ Challenge Title : <h3><%= @challenge.title %></h3>
 	<tbody>
 		
 		<% @player_challenges.each do |player|  %>
-			<%= form_for player, :url => {:controller => "player_challenges", :action => "update"} do |f|  %>
+			<%= form_for player, :url => {:controller => "player_challenges", :action => "update"}, :method => "PUT" do |f|  %>
 				<tr>
 					<td><%= User.find(player.user_id).name %></td>
 					<td><%= Time.now.to_date %></td>				
@@ -32,14 +32,6 @@ Challenge Title : <h3><%= @challenge.title %></h3>
 				<tr class="borderline">
 					<td colspan="6">	
 						 <strong> Description </strong> : <%= f.object.description %>
-						<%# comments = player.comments.build unless player.comments.present? %>
-						<%#= f.fields_for :comments do |c| %>
-							
-							<%#= c.hidden_field :challenge_id, :value => @challenge.id %>
-							<%#= c.text_field :description, :placeholder => "description", :style => "width:100%;" %>
-							<%#= c.file_field :avatar %>
-
-						<%# end %>
 						<%= f.submit "Save", :class => "btn btn-primary", :style => "float:right;" %>
 					</td>
 				</tr>
