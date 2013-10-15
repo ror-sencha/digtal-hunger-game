@@ -6,7 +6,7 @@ class PlayerChallengesController < ApplicationController
 	def update
 		@player = PlayerChallenge.find(params[:player_challenge][:player_challenge_id])
 		if @player.update_attributes(player_params)
-			redirect_to users_path, :notice => "Success..!"
+			redirect_to challenges_path, :notice => "Success..!"
 		else
 			redirect_to :back, :notice => "Error..!"
 		end
