@@ -14,11 +14,15 @@ class Api::V1::UsersController < Api::V1::BaseController
     if params["send_email_to_md"].present? && params["send_email_to_md"].to_s == "true"
       HungerMailer.email_send_to_md(@user.email,"#{DOMAIN_CONFIG}/").deliver
     end
-    
+    logger.warn("=======1======#{@import_user.inspect}=========")
     if @import_user.present?
-      @import_user.update_attributes(user_params)
-      if @import_user.save
-        @user = @import_user
+      if @import_user.sign_in_count == 0
+        @import_user.update_attributes(user_params)
+        if @import_user.save
+           @user = @import_user
+        end
+      else
+        render_json({errors: "Email already present!", status: 404}.to_json)
       end
     else
       @user.status = "spectator"

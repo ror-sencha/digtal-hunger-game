@@ -8,8 +8,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :name, :status, presence: true
-  validates :email, :presence => true, :uniqueness => true
- 
+  validates :email, :presence => true#, :uniqueness => true
+  validates :email, :uniqueness => true
+  
   USER_STATUS = %w(spectator md player judge admin)
 
   has_attached_file :avatar,
