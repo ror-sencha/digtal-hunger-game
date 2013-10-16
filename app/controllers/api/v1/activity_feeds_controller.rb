@@ -58,7 +58,9 @@ class Api::V1::ActivityFeedsController < Api::V1::BaseController
     msg = params[:message]
     if id.present? && msg.present?
       @activity_feed = ActivityFeed.find(id)
-  	  @activity_feed.feed_comments.create(:message => params[:message], :user_id => @current_user.id )
+  	  @activity_feed.feed_comments.create(:message => params[:message], :user_id => @current_user.id, :point => 5 )
+      point = @current_user.points + 5
+      @current_user.update_attributes(:points => point)
       @activity_feed.save
       RecentActivity.create(:user_id => @current_user.id, :rc_type => "activty_feed_comment", :message => "You comment on activty feed.")
       render_json({message: "Successfully add comments", status: 200}.to_json)

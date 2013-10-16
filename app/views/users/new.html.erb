@@ -1,6 +1,6 @@
 <h3>Add User</h3>
 <%= form_for(@user) do |f| %>
-
+  <%= error_messages_for @user %>
   <div><%= f.label :name %><br />
   <%= f.text_field :name, :placeholder => "Name" %></div>
 

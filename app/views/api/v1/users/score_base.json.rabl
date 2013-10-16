@@ -24,3 +24,6 @@ end
 node :like_and_dislike_point do |c|
  c.activityfeed_likepoints.map(&:point).sum
 end
+node :feed_comment_point do |c|
+	c.feed_comments.map(&:point).sum
+end

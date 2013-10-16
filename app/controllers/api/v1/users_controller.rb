@@ -1,6 +1,5 @@
 class Api::V1::UsersController < Api::V1::BaseController
 
-
   skip_before_action :authentication_user_with_authentication_token, :only => [:create, :forget_password, :search, :md_user_type_list]
 
   def create
