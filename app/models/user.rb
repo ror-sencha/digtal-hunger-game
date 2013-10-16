@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, #:confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :name, :email, :status, presence: true
+  validates :name, :status, presence: true
+  validates :email, :presence => true, :uniqueness => true
  
   USER_STATUS = %w(spectator md player judge admin)
 
