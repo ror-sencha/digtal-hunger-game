@@ -24,6 +24,7 @@ class Api::V1::UsersController < Api::V1::BaseController
     else
       @user.status = "spectator"
       if @user.save
+        HungerMailer.registeration_thanks(@user.email).deliver
         @auth_token = @user.create_token
       else
         render_json({errors: @user.full_errors, status: 404}.to_json)

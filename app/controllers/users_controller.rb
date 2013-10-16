@@ -22,6 +22,7 @@ class UsersController < ApplicationController
     @user.confirmation_token = nil
     @user.confirmed_at  = Time.now
   	if @user.save
+      HungerMailer.registeration_thanks(@user.email).deliver
   		redirect_to users_path, :notice => "Successfully Created!"
   	else
   		render "new"
