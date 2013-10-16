@@ -13,6 +13,8 @@ class Api::V1::PlayerChallengesController < Api::V1::BaseController
         @player_challenge.avatar = params[:avatar]
         @player_challenge.date_submitted = Time.now.to_date
         if @player_challenge.save
+          ActivityFeed.create(:message => "Recently participate in #{@player_challenge.challenge.title}", :user_id => @current_user.id )
+          #RecentActivity.create(:user_id => @current_user.id, :rc_type => "player_challenge", :message => "You post answer on #{@player_challenge.challenge.title}")
           if @player_challenge.challenge.created_at.to_date == Time.now.to_date
             points = @current_user.points
             day_of_post_point = points + 25

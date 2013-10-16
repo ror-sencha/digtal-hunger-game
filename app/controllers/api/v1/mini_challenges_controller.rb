@@ -17,6 +17,8 @@ class Api::V1::MiniChallengesController < Api::V1::BaseController
   			@mini_answer = MiniChallengeAnswer.new(mini_challenge_params)
   			@mini_answer.user_id = @current_user.id
   			@mini_answer.save
+        ActivityFeed.create(:message => "Recently participate in #{@mc.title} mini challenge!", :user_id => @current_user.id )
+        RecentActivity.create(:user_id => @current_user.id, :rc_type => "mini_player_challenge", :message => "Recently post in #{@mc.title} mini challenge")
   			@options = @mc.challenge_options.where("answer = ?", true)
   			if @options.present?
   				current_answer = @options.first.option

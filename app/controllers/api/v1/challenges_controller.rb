@@ -17,7 +17,7 @@ class Api::V1::ChallengesController < Api::V1::BaseController
   			total_like = @challenge.likes + 1
   			@challenge.likes = total_like
   			@challenge.challenge_likes.build(:user_id => @current_user.id )
-  			@challenge.recent_activities.build()
+  			#@challenge.recent_activities.build()
   			@challenge.save
   			render_json({message: "Point added !", status: 200}.to_json)
   		end

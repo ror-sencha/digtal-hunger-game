@@ -45,6 +45,7 @@ class Api::V1::UsersController < Api::V1::BaseController
         @user.update_attributes(:reset_password_token => random_token)
         cpurl =  change_password_url(:reset_password_token => random_token)
         HungerMailer.send_forget_password_request(email,random_token).deliver
+        RecentActivity.create(:user_id => @user.id, :rc_type => "forget_password", :message => "You recently send email for forget password.")
         render_json({message: "Please Check your email for change password.", status: 200}.to_json)        
       else
         render_json({errors: "User is not present with #{email}!", status: 404}.to_json)      
@@ -57,9 +58,8 @@ class Api::V1::UsersController < Api::V1::BaseController
   def get_profile
     if params[:user_id].present?
       @user = User.find(params[:user_id])
-      @recent_activity = @user.recent_activities
+      @recent_activity = @user.recent_activities.limit(20).order("created_at DESC")
       @player_challenges = @user.player_challenges
-      logger.warn("=====#{@current_user.inspect}=============")
       @cuser = @current_user
     else
       render_json({errors: "Opps something is missing. please pass user_id.", status: 404}.to_json)      
@@ -76,6 +76,7 @@ class Api::V1::UsersController < Api::V1::BaseController
         end
       end
       @user.save
+      RecentActivity.create(:user_id => @user.id, :rc_type => "update_profile", :message => "Your profile is successfully updated")      
       render :file => "api/v1/users/get_profile"
     else
       render_json({errors: @user.full_errors, status: 404}.to_json)
@@ -167,7 +168,9 @@ class Api::V1::UsersController < Api::V1::BaseController
     user_id = params[:user_id]
     media_type = params[:status]
     if user_id.present? && media_type.present?
-      SocialMediaPoint.
+      #SocialMediaPoint.create()
+      render_json({message: "Liked!", status: 200}.to_json)
+      #RecentActivity.create(:user_id => @current_user.id, :rc_type => "social_media_like", :message => "you liked in #{media_type}")
     else
       render_json({errors: "Passing params is wrong for finding user and media!", status: 404}.to_json)
     end
@@ -186,6 +189,7 @@ class Api::V1::UsersController < Api::V1::BaseController
         support_user.point = 10
         support_user.support_id = supporter_id
         support_user.save
+        RecentActivity.create(:user_id => @user.id, :rc_type => "support_to_player", :message => "#{@supporter.fullname} will support you.")
         render_json({message: "support added!", status: 200}.to_json)
       else
         render_json({errors: @user.full_errors, status: 404}.to_json)

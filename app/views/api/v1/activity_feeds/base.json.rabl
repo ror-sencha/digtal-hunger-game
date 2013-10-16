@@ -1,5 +1,5 @@
 object @recent_activity
-attributes :message, :is_like, :user_id, :created_at, :liked_by
+attributes :message, :user_id, :created_at, :liked_by
 node :profile_image do |c|
 	c.user.avatar_url if c.user.avatar.present?
 end
@@ -15,6 +15,14 @@ end
 node :activity_id do |c|
 	c.id
 end
+node :is_like do |c|
+	if ActivityfeedLikepoint.find_by_user_id_and_activity_feed_id(@user,c.id).present?
+		ActivityfeedLikepoint.find_by_user_id_and_activity_feed_id(@user,c.id).is_like
+	else
+		false
+	end
+end
+
 child :feed_comments, :object_root => false do
   extends("api/v1/activity_feeds/base1")
 end

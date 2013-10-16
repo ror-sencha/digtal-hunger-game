@@ -11,6 +11,7 @@ class Api::V1::JudgePointsController < Api::V1::BaseController
     else
       @judge = JudgePoint.new(judge_params)
       if @judge.save
+        RecentActivity.create(:user_id => @current_user.id, :rc_type => "judge_point", :message => "Recently added points.")
         render_json({errors: "Hurry. Successfully Added points", status: 200}.to_json)
       else
         render_json({errors: "Something is wrong. please fix it", status: 404}.to_json)
