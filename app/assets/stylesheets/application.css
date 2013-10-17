@@ -17,3 +17,4 @@
 
 .challenge_show_page th{width: 2%; }
 .borderline{border-bottom: 1px solid black;}
+input, select, textarea { width: 400px; }

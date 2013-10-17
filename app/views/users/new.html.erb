@@ -14,11 +14,12 @@
   <%= f.text_field :title, :placeholder => "Title" %></div>
 
 
-<div><%= f.label :company %><br />
-  <%= f.text_field :company, :placeholder => "Company" %></div>
+<div><%= f.label :company, "District" %><br />
+  <%#= f.text_field :company, :placeholder => "Company" %>
+  <%= f.select(:sex, [["Solera Corporate", "Solera Corporate"], ["Audatex", "Audatex"], ["ABZ", "ABZ"], ["AudaExplore", "AudaExplore"], ["AUTOonline", "AUTOonline"], ["Hollander", "Hollander"], ["HPI", "HPI"], ["Informex", "Informex"], ["Inpart", "Inpart"], ["Market Scan", "Market Scan"], ["Sidexa", "Sidexa"]]) %> </div>
 
 <div><%= f.label :bio %><br />
-  <%= f.text_field :bio , :placeholder => "Bio" %></div>
+  <%= f.text_area :bio , :placeholder => "Bio" %></div>
 
 
   <div><%= f.label :password %><br />
