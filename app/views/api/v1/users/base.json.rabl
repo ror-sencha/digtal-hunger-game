@@ -24,3 +24,6 @@ end
 node :skills_endorse do |c|
 	UserEndorse.where("endorse_id = ? && user_id = ?", c.id, @current_user.id).map(&:skill_id) if c.present? && @current_user.present?
 end
+node :md_name do |c|
+	User.find(c.md_id).fullname if c.md_id.present?
+end
