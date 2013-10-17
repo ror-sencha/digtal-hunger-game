@@ -1,8 +1,8 @@
 class Challenge < ActiveRecord::Base
 	belongs_to :user
-	has_one :document_challenge
-	has_one :video_challenge
-  has_many :player_challenges
+	has_one :document_challenge, :dependent => :destroy
+	has_one :video_challenge, :dependent => :destroy
+  has_many :player_challenges, :dependent => :destroy
   has_many :recent_activities
   has_many :challenge_likes
 

@@ -32,6 +32,9 @@
       <td><%= challenge.end_date.strftime("%d/%m/%Y") %></td>
       <td><%= challenge.is_published %></td>
       <td><%= link_to "View Challenge", show_challenge_path(challenge),'data-no-turbolink' => false %></td>
+      <td>
+        <%= link_to "Delete Challenge", challenge,'data-no-turbolink' => false, :method => :delete, data: { confirm: 'Are you sure?' } %>
+      </td>
     </tr>
     <% end %>
   </tbody>
