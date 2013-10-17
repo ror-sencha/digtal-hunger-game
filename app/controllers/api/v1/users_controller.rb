@@ -16,7 +16,7 @@ class Api::V1::UsersController < Api::V1::BaseController
     end
     logger.warn("=======1======#{@import_user.inspect}=========")
     if @import_user.present?
-      if @import_user.sign_in_count == 0
+      if @import_user.sign_in_count == 0 && !@import_user.current_sign_in_at.nil?
         @import_user.update_attributes(user_params)
         if @import_user.save
            @user = @import_user
@@ -26,6 +26,7 @@ class Api::V1::UsersController < Api::V1::BaseController
       end
     else
       @user.status = "spectator"
+      @user.current_sign_in_at = Time.now
       if @user.save
         HungerMailer.registeration_thanks(@user.email).deliver
         @auth_token = @user.create_token
@@ -149,6 +150,7 @@ class Api::V1::UsersController < Api::V1::BaseController
       if accept.present? && accept.to_s == "accept"
         @user1.status = "player"
         @user1.save
+        HungerMailer.md_accept_request(@user1.email).deliver
         render_json({message: "Accepted!", status: 200}.to_json)
       elsif accept == "reject"
         @user1.message_for_rejection = params[:message]

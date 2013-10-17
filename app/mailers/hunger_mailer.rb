@@ -5,6 +5,18 @@ class HungerMailer < MandrillMailer::TemplateMailer
 
 
 
+  def md_accept_request(email)
+    mandrill_mail template: 'md_accept_request',
+    subject: "Thanks",
+    from: "info@solerahungergames.com",
+    from_name: "HungerGame",
+    to: {email: email},
+    vars: {
+       'EMAIL' => email
+     }    
+  end
+
+
   def registeration_thanks(email)
     mandrill_mail template: 'registeration_thanks',
     subject: "Thanks",
