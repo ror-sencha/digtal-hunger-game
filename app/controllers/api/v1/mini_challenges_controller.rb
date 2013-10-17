@@ -9,6 +9,7 @@ class Api::V1::MiniChallengesController < Api::V1::BaseController
   def create
   	mini_challenge_id = params[:mini_challenge][:mini_challenge_id]
   	option = params[:mini_challenge][:option]
+    logger.warn("====mini====#{option}========")
   	if mini_challenge_id.present? && option.present?
   		if MiniChallengeAnswer.where("user_id = ? and mini_challenge_id = ?", @current_user.id, mini_challenge_id).present?
   			render_json({message: "Opps.. You Already Given Answer!. so you can't do again", status: 200}.to_json)	

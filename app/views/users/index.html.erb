@@ -11,7 +11,7 @@
     <%= form_tag users_path, :method => 'get' do %>
       <p>
         <%= text_field_tag :search, params[:search], :placeholder => "search by username " %>
-        <%= submit_tag "Search", :name => nil %>
+        <%= submit_tag "Search", :name => nil, :style => "width:70px;" %>
       </p>
     <% end %>
   </div>
