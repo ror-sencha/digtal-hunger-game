@@ -26,6 +26,7 @@
         <th>User Type</th>
         <th>Registered</th>
         <th>Email Address</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -43,6 +44,9 @@
         <td><%= user.status %></td>
         <td><%= user.confirmed_at.present?? "Yes" : "No" %></td>
         <td><%= user.email %></td>
+        <td>
+        <%= link_to "Delete User", user,'data-no-turbolink' => false, :method => :delete, data: { confirm: 'Are you sure?' } %>
+      </td>
       </tr>
       <% end %>
     </tbody>
