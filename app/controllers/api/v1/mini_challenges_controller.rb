@@ -3,7 +3,7 @@ class Api::V1::MiniChallengesController < Api::V1::BaseController
   before_action :authentication_user_with_authentication_token
 
   def index
-    @mini_challenges  = MiniChallenge.all
+    @mini_challenges  = MiniChallenge.find(:all, :conditions => ["is_published = ?", true])
   end
 
   def create

@@ -50,7 +50,7 @@ class MiniChallengesController < ApplicationController
   end
 
 	def mini_challenge_params
-    params.require(:mini_challenge).permit(:title, :question, :challenge_options_attributes => [:id, :option, :answer]) 
+    params.require(:mini_challenge).permit(:title, :question, :is_published, :challenge_options_attributes => [:id, :option, :answer]) 
   end
 
 end

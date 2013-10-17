@@ -8,4 +8,7 @@ class MiniChallenge < ActiveRecord::Base
 	
 	validates :title, :question, presence: true
 
+	def is_published?
+		self.is_published == true
+	end
 end

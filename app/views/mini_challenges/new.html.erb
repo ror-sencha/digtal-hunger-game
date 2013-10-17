@@ -29,6 +29,13 @@
   	<%= co.check_box :answer, :style => "width:20px;" %> Correct? 
 	</div>
 <% end %>
+
+  <div>
+    <%= f.label :is_published %>
+    <span style=""></span>
+    <%= f.check_box :is_published, :style => "width: 10%;" %>
+  </div>
+
 <%#= f.link_to_add "Add More Options", :challenge_options  %>
 	<br>
   <div><%= f.submit "Save Challenge", :class => "btn btn-primary", :style => "float:right;margin-right:40%;" %></div>
