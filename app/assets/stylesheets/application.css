@@ -20,3 +20,5 @@
 input, select, textarea { width: 400px; }
 #challenge_start_date{width: 150px;}
 #challenge_end_date{width: 150px;}
+#player_challenge_make_public{width: 100%;}
+#player_challenge_judge_can_view{width: 100%;}

@@ -6,3 +6,6 @@ end
 node :description do |r|
 	r.challenge.description if r.challenge.present? && r.challenge.description.present?
 end
+node :youtube_link do |r|
+	r.youtube_link if r.make_public == true
+end

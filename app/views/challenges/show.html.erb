@@ -19,7 +19,7 @@ Challenge Title : <h3><%= @challenge.title %></h3>
 				<tr>
 					<td><%= User.find(player.user_id).name %></td>
 					<td><%= Time.now.to_date %></td>				
-					<td><%= f.text_field :youtube_link %></td>
+					<td><%= f.text_field :youtube_link, :style => "width:200px;" %></td>
 					<% if f.object.avatar.present? && f.object.avatar_content_type.to_s == "image/png" or  f.object.avatar_content_type.to_s == "image/jpg" or f.object.avatar_content_type.to_s == "image/jpeg" %>
 						<td><a class="cbox" href="<%= f.object.avatar.url %>" title="Image.">Image</a></td>
 					<% else %>
@@ -32,7 +32,7 @@ Challenge Title : <h3><%= @challenge.title %></h3>
 				<tr class="borderline">
 					<td colspan="6">	
 						 <strong> Description </strong> : <%= f.object.description %>
-						<%= f.submit "Save", :class => "btn btn-primary", :style => "float:right;" %>
+						<%= f.submit "Save", :class => "btn btn-primary", :style => "float:right;width:70px;" %>
 					</td>
 				</tr>
 			<% end %>

@@ -1,11 +1,25 @@
 class PlayerChallengesController < ApplicationController
 
+	before_filter :authenticate_user!
+
 	def create
 	end
 
 	def update
 		@player = PlayerChallenge.find(params[:player_challenge][:player_challenge_id])
+		@user = current_user
+		logger.warn("=========#{@user.inspect }===========")
 		if @player.update_attributes(player_params)
+			if @player.youtube_link.present?
+				if @player.activityfeed_id.present? 
+					actifeed = ActivityFeed.find(@player.activityfeed_id)
+					actifeed.update_attributes(:message => "#{@player.youtube_link}", :user_id => @user.id)
+				else
+					actifeed = ActivityFeed.create(:message => "#{@player.youtube_link}", :user_id => @user.id )
+					@player.activityfeed_id = actifeed.id
+					@player.save
+				end
+			end
 			redirect_to challenges_path, :notice => "Success..!"
 		else
 			redirect_to :back, :notice => "Error..!"
