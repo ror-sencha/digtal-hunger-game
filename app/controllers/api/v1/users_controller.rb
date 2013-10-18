@@ -28,8 +28,9 @@ class Api::V1::UsersController < Api::V1::BaseController
       @user.status = "spectator"
       @user.current_sign_in_at = Time.now
       if @user.save
-        HungerMailer.registeration_thanks(@user.email).deliver
         @auth_token = @user.create_token
+        logger.warn("======auth_token==2===#{@auth_token}======")
+        HungerMailer.registeration_thanks(@user.email).deliver
       else
         render_json({errors: @user.full_errors, status: 404}.to_json)
       end

@@ -12,3 +12,6 @@ end
 node :avatar_url do |cd|
 	cd.user.avatar_url
 end
+node :player_challenge_id do |c|
+	c.id
+end
