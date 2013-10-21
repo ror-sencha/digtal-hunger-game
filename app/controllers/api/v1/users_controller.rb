@@ -170,7 +170,7 @@ class Api::V1::UsersController < Api::V1::BaseController
 
 
   def scoreboard
-    @users = User.where("status = ?", "player")
+    @users = User.where("status = ? && confirmed_at IS NOT NULL", "player")
   end
 
   def social_media_like
