@@ -24,7 +24,7 @@ class Api::V1::PlayerChallengesController < Api::V1::BaseController
             ch_point.point = 25
             ch_point.save
           elsif @player_challenge.challenge.created_at.to_date == Time.now.to_date - 1.day
-            points = @current_user.points
+            points = @current_user.points.present? ? @current_user.points : 0
             day_of_post_point = points + 21
             @current_user.update_attributes(:points => day_of_post_point)            
             ch_point = @current_user.challenges_points.build
@@ -32,7 +32,7 @@ class Api::V1::PlayerChallengesController < Api::V1::BaseController
             ch_point.point = 21
             ch_point.save
           elsif @player_challenge.challenge.created_at.to_date == Time.now.to_date - 2.day
-            points = @current_user.points
+            points = @current_user.points.present? ? @current_user.points : 0
             day_of_post_point = points + 17
             @current_user.update_attributes(:points => day_of_post_point)            
             ch_point = @current_user.challenges_points.build
@@ -40,7 +40,7 @@ class Api::V1::PlayerChallengesController < Api::V1::BaseController
             ch_point.point = 17
             ch_point.save
           elsif @player_challenge.challenge.created_at.to_date == Time.now.to_date - 3.day
-            points = @current_user.points
+            points = @current_user.points.present? ? @current_user.points : 0
             day_of_post_point = points + 13
             @current_user.update_attributes(:points => day_of_post_point)            
             ch_point = @current_user.challenges_points.build
@@ -48,7 +48,7 @@ class Api::V1::PlayerChallengesController < Api::V1::BaseController
             ch_point.point = 13
             ch_point.save
           elsif @player_challenge.challenge.created_at.to_date == Time.now.to_date - 4.day
-            points = @current_user.points
+            points = @current_user.points.present? ? @current_user.points : 0
             day_of_post_point = points + 9
             @current_user.update_attributes(:points => day_of_post_point)            
             ch_point = @current_user.challenges_points.build
@@ -56,7 +56,7 @@ class Api::V1::PlayerChallengesController < Api::V1::BaseController
             ch_point.point = 9
             ch_point.save
           elsif @player_challenge.challenge.created_at.to_date == Time.now.to_date - 5.day
-            points = @current_user.points
+            points = @current_user.points.present? ? @current_user.points : 0
             day_of_post_point = points + 5
             @current_user.update_attributes(:points => day_of_post_point)            
             ch_point = @current_user.challenges_points.build
@@ -64,7 +64,7 @@ class Api::V1::PlayerChallengesController < Api::V1::BaseController
             ch_point.point = 5
             ch_point.save
           else
-            points = @current_user.points
+            points = @current_user.points.present? ? @current_user.points : 0
             day_of_post_point = points + 1
             @current_user.update_attributes(:points => day_of_post_point)            
             ch_point = @current_user.challenges_points.build
@@ -88,16 +88,20 @@ class Api::V1::PlayerChallengesController < Api::V1::BaseController
   def list_of_player_for_challenge
     challenge_id = params[:challenge_id]
     if challenge_id.present?
-      @player = Challenge.find(challenge_id)
-      if @player.present?
-        @playes_challenge = @player.player_challenges
+      @challenge = Challenge.find(challenge_id)
+      if @challenge.present?
+        jp1 = JudgePoint.all.map(&:player_challenge_id)
+        jp2 = JudgePoint.all.map(&:user_id)
+        #@player_challenges = @challenge.player_challenges.where("id not in (?) && user_id not in (?)",jp1,jp2)
+        @pc1 = @challenge.player_challenges
+        @pc2 = @challenge.player_challenges.joins("left judge_points")
+        @playes_challenge = @pc1 - @pc2
       else
         render_json({message: "No Data Present Yet !", status: 200}.to_json)
       end
     else
       render_json({errors: "Something is wrong. please check parameters !", status: 404}.to_json)
     end
-
   end
 
 
