@@ -1,5 +1,5 @@
 object @user
-attributes :status, :avatar_url,  :points
+attributes :status, :avatar_url
 node :user_id do |c|
 	c.id
 end
@@ -26,4 +26,7 @@ node :like_and_dislike_point do |c|
 end
 node :feed_comment_point do |c|
 	c.feed_comments.map(&:point).sum
+end
+node :points do |c|
+	c.points if c.points.present?
 end
