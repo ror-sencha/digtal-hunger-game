@@ -104,7 +104,7 @@ class Api::V1::UsersController < Api::V1::BaseController
         unless old_ue.present? 
           u = UserEndorse.new(user_endorse)
           u.save
-          RecentActivity.create(:comment_id => user_id, :user_id => endorse_id, :rc_type => "endorse", :message => "endorses #{@user.name} for #{@skill.name} Skill")
+          RecentActivity.create(:comment_id => user_id, :user_id => endorse_id, :rc_type => "endorse", :message => "endorses #{@endorse.name} for #{@skill.name} Skill")
           render_json({message: "Successfully Endorse", status: 200}.to_json)
         else
           render_json({message: "Already Endorse!", status: 200}.to_json)
