@@ -7,10 +7,10 @@ node :username do |c|
 	c.fullname
 end
 node :challenges_point do |c|
-	c.challenges_points.map(&:point).sum if c.challenges_points.map(&:point).present?
+	c.challenges_points.map(&:point).sum if c.challenges_points.present? && c.challenges_points.map(&:point).present?
 end
 node :social_media_point do |c|
-	c.social_media_points.map(&:point).sum if c.social_media_points.map(&:point).present?
+	c.social_media_points.map(&:point).sum if c.social_media_points.present? && c.social_media_points.map(&:point).present?
 end
 node :support_point do |c|
 	c.support_points.map(&:point).sum
