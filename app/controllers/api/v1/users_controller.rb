@@ -19,7 +19,7 @@ class Api::V1::UsersController < Api::V1::BaseController
       if @import_user.sign_in_count == 0 && !@import_user.current_sign_in_at.nil?
         @import_user.update_attributes(user_params)
         if @import_user.save
-           @user.confirmed_at  = Time.now unless @user.confirmed_at.present?
+           @import_user.confirmed_at  = Time.now unless @user.confirmed_at.present?
            @user = @import_user
         end
       else
