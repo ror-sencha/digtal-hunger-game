@@ -18,8 +18,8 @@ class Api::V1::UsersController < Api::V1::BaseController
     if @import_user.present?
       if @import_user.sign_in_count == 0 && !@import_user.current_sign_in_at.nil?
         @import_user.update_attributes(user_params)
+        @import_user.confirmed_at = Time.now unless @user.confirmed_at.present?
         if @import_user.save
-           @import_user.confirmed_at = Time.now unless @user.confirmed_at.present?
            @user = @import_user
         end
       else
@@ -28,8 +28,8 @@ class Api::V1::UsersController < Api::V1::BaseController
     else
       @user.status = "spectator"
       @user.current_sign_in_at = Time.now
+      @user.confirmed_at  = Time.now unless @user.confirmed_at.present?
       if @user.save
-        @user.confirmed_at  = Time.now unless @user.confirmed_at.present?
         @auth_token = @user.create_token
         logger.warn("======auth_token==2===#{@auth_token}======")
         HungerMailer.registeration_thanks(@user.email).deliver
