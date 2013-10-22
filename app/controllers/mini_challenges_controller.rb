@@ -1,7 +1,7 @@
 class MiniChallengesController < ApplicationController
 
 	before_filter :authenticate_user!
-	before_action :set_mini_challenge, only: [:show, :edit, :update, :destroy]
+	before_action :set_mini_challenge, only: [:show, :destroy]
 
 	def new
 		@mini_challenge = current_user.mini_challenges.build
@@ -23,13 +23,14 @@ class MiniChallengesController < ApplicationController
 	end
 
 	def edit
-
+		@mini_challenge = MiniChallenge.find(params[:id])
 	end
 
 	def update
+		@mini_challenge = MiniChallenge.find(params[:id])
 		respond_to do |format|
        if @mini_challenge.update(mini_challenge_params)
-        format.html { redirect_to @mini_challenge, notice: 'Mini challenge was successfully updated.' }
+        format.html { redirect_to mini_challenges_path, notice: 'Mini challenge was successfully updated.' }
       else
         format.html { render action: 'edit' }
       end
