@@ -8,6 +8,8 @@
     <tr>
       <th>Challenge Title</th>
       <th>Challenge Question</th>
+      <th>Is Published </th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -15,6 +17,7 @@
     <tr>
       <td><%= challenge.title %></td>
       <td><%= challenge.question %></td>
+      <td><%= challenge.is_published ? "Yes" : "No" %></td>
       <td><%= link_to "Edit", edit_mini_challenge_url(challenge) %></td>
     </tr>
     <% end %>
