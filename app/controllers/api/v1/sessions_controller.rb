@@ -18,6 +18,7 @@ class Api::V1::SessionsController < Api::V1::BaseController
       end
       sign_in_count = @user.sign_in_count + 1
       @user.update_attributes(:current_sign_in_at => Time.now, :sign_in_count => sign_in_count)
+      @user.update_attributes(:confirmed_at => Time.now) unless @user.confirmed_at.present?
       render :file => "api/v1/sessions/create"
     else
       render_json({errors: message, status: 404}.to_json)
