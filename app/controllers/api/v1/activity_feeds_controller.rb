@@ -62,7 +62,7 @@ class Api::V1::ActivityFeedsController < Api::V1::BaseController
       point = @current_user.points + 5
       @current_user.update_attributes(:points => point)
       @activity_feed.save
-      RecentActivity.create(:user_id => @current_user.id, :rc_type => "activty_feed_comment", :message => "You comment on activty feed.")
+      RecentActivity.create(:user_id => @current_user.id, :rc_type => "activty_feed_comment", :message => "Comment on #{@activity_feed.user.name} activty feed.")
       render_json({message: "Successfully add comments", status: 200}.to_json)
     else
       render_json({errors: "Message can't be blank!", status: 404}.to_json)
