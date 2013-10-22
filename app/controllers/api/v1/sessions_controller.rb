@@ -18,7 +18,11 @@ class Api::V1::SessionsController < Api::V1::BaseController
       end
       sign_in_count = @user.sign_in_count + 1
       if sign_in_count.to_i == 1
-        @user.update_attributes(:points => 5)
+        lg_point = @user.login_points.build
+        lg_point.point = 5
+        lg_point.save
+        lr = @user.points + 5
+        @user.update_attributes(:points => lr)
       end
       @user.update_attributes(:current_sign_in_at => Time.now, :sign_in_count => sign_in_count)
       @user.update_attributes(:confirmed_at => Time.now) unless @user.confirmed_at.present?
