@@ -40,6 +40,8 @@ class Api::V1::ActivityFeedsController < Api::V1::BaseController
           @aflp.is_like = true
           @aflp.point = 5
           @aflp.save
+          cu_point = @current_user.points + @aflp.point
+          @current_user.update_attributes(:points => cu_point)
           msg = "Liked!"
         else
           @aflp.update_attributes(:is_like => false, :point => 0)
