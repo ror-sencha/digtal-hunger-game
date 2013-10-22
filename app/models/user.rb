@@ -160,5 +160,13 @@ class User < ActiveRecord::Base
     else
       find(:all)
     end
-end
+  end
+
+  def self.search2(search)
+    if search
+      where('name LIKE ?', "%#{search}%")
+    else
+      find(:all)
+    end
+  end
 end

@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def index
     if params[:search].present?
-      @users = User.search(params[:search]).page(params[:page]).per(10)
+      @users = User.search2(params[:search]).page(params[:page]).per(10)
     else
       @users = User.page(params[:page]).per(10)
     end
