@@ -33,7 +33,7 @@ class Api::V1::ActivityFeedsController < Api::V1::BaseController
         aflikepoint.save
         cu_point = @current_user.points + 5
         @current_user.update_attributes(:points => cu_point)
-        RecentActivity.create(:user_id => @current_user.id, :rc_type => "activty_feed_like", :message => "You liked or dislike on activty feed.")
+        RecentActivity.create(:user_id => @current_user.id, :rc_type => "activty_feed_like", :message => "Liked on #{@activty_feed.user.name} activty feed.")
         render_json({message: "#{msg}", status: 200}.to_json)
       else
         if like_or_dislike == "true"
@@ -45,7 +45,7 @@ class Api::V1::ActivityFeedsController < Api::V1::BaseController
           @aflp.update_attributes(:is_like => false, :point => 0)
           msg = "Disliked!"
         end
-        RecentActivity.create(:user_id => @current_user.id, :rc_type => "activty_feed_like", :message => "Was liked or dislike on activty feed.")
+        RecentActivity.create(:user_id => @current_user.id, :rc_type => "activty_feed_like", :message => "Liked on #{@activty_feed.user.name} activty feed.")
         render_json({message: "#{msg}", status: 200}.to_json)
       end
     else
