@@ -12,7 +12,7 @@ class Api::V1::UsersController < Api::V1::BaseController
       end
     end
     logger.warn("=================#{params.inspect}===============#{params['send_email_to_md']}=====")
-    if params["send_email_to_md"].present? && params["send_email_to_md"].to_s == "true"
+    if params[:user][:send_email_to_md].present? && params[:user][:send_email_to_md].to_s == "true"
       logger.warn("=========send-email==============")
       HungerMailer.email_send_to_md(@user.email,"#{DOMAIN_CONFIG}/").deliver
     end
