@@ -17,7 +17,10 @@ Challenge Title : <h3><%= @challenge.title %></h3>
 		<% @player_challenges.each do |player|  %>
 			<%= form_for player, :url => {:controller => "player_challenges", :action => "update"}, :method => "PUT" do |f|  %>
 				<tr>
-					<td><%= User.find(player.user_id).name %></td>
+					<td>
+						<% tem_user = User.find(player.user_id)  %>
+						<%= tem_user.name if tem_user.present? %>
+					</td>
 					<td><%= Time.now.to_date %></td>				
 					<td><%= f.text_field :youtube_link, :style => "width:200px;" %></td>
 					<% if f.object.avatar.present? && f.object.avatar_content_type.to_s == "image/png" or  f.object.avatar_content_type.to_s == "image/jpg" or f.object.avatar_content_type.to_s == "image/jpeg" %>
