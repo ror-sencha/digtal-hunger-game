@@ -16,6 +16,7 @@
   </thead>
   <tbody>
   	<% @challenges.each do |challenge| %>
+    <% if challenge.user.present? %>
     <tr>
       <td>
         <% if challenge.is_video_challenge? %>
@@ -36,6 +37,7 @@
         <%= link_to "Delete Challenge", challenge,'data-no-turbolink' => false, :method => :delete, data: { confirm: 'Are you sure?' } %>
       </td>
     </tr>
+    <% end %>
     <% end %>
   </tbody>
 </table>
