@@ -3,8 +3,8 @@ class Challenge < ActiveRecord::Base
 	has_one :document_challenge, :dependent => :destroy
 	has_one :video_challenge, :dependent => :destroy
   has_many :player_challenges, :dependent => :destroy
-  has_many :recent_activities
-  has_many :challenge_likes
+  has_many :recent_activities, :dependent => :destroy
+  has_many :challenge_likes, :dependent => :destroy
 
   validates :title, :start_date, :end_date, :description, presence: true
 

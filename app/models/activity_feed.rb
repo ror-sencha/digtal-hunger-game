@@ -1,7 +1,7 @@
 class ActivityFeed < ActiveRecord::Base
 	belongs_to :user
-	has_many :feed_comments
-  has_many :activityfeed_likepoints  
+	has_many :feed_comments, :dependent => :destroy
+  has_many :activityfeed_likepoints, :dependent => :destroy  
 	#has_attached_file :avatar,
   #  :styles => { :thumb => "50x50>", :medium => "200x200>", :large => "640x640>"},
   #  :storage => :s3,

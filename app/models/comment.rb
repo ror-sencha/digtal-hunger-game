@@ -1,6 +1,6 @@
 class Comment < ActiveRecord::Base
 	belongs_to :player_challenge
-	has_many :recent_activities
+	has_many :recent_activities, :dependent => :destroy
 		  
 	has_attached_file :avatar,
 	 									:path => "public/system/comment/:attachment/:id_partition/:style/:filename",

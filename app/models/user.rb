@@ -28,22 +28,22 @@ class User < ActiveRecord::Base
   has_many :authentication_tokens, :dependent => :destroy
   has_many :challenges, :dependent => :destroy
   has_many :mini_challenges, :dependent => :destroy
-  has_many :recent_activities
-  has_many :challenge_likes
-  has_many :user_skills
-  has_many :user_endorses
+  has_many :recent_activities, :dependent => :destroy
+  has_many :challenge_likes, :dependent => :destroy
+  has_many :user_skills, :dependent => :destroy
+  has_many :user_endorses, :dependent => :destroy
   has_many :activity_feeds, :dependent => :destroy
-  has_many :feed_comments
-  has_many :mini_challenge_answers
-  has_many :social_media_points
-  has_many :judge_points
-  has_many :player_challenges
-  has_many :minichallenge_points
-  has_many :challenges_points
-  has_many :support_points
-  has_many :login_points
-  has_many :endorses
-  has_many :activityfeed_likepoints
+  has_many :feed_comments, :dependent => :destroy
+  has_many :mini_challenge_answers, :dependent => :destroy
+  has_many :social_media_points, :dependent => :destroy
+  has_many :judge_points, :dependent => :destroy
+  has_many :player_challenges, :dependent => :destroy
+  has_many :minichallenge_points, :dependent => :destroy
+  has_many :challenges_points, :dependent => :destroy
+  has_many :support_points, :dependent => :destroy
+  has_many :login_points, :dependent => :destroy
+  has_many :endorses, :dependent => :destroy
+  has_many :activityfeed_likepoints, :dependent => :destroy
   accepts_nested_attributes_for :user_skills
   ## Scopes
 
