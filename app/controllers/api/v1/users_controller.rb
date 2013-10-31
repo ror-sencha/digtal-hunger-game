@@ -11,7 +11,8 @@ class Api::V1::UsersController < Api::V1::BaseController
         @import_user.user_skills.build(:skill_id => skill) if @import_user.present?
       end
     end
-    logger.warn("=================#{params.inspect}===============#{params['send_email_to_md']}=====")
+    logger.warn("=======test==========#{params.inspect}===============#{params[:user][:send_email_to_md]}=====")
+    logger.warn("=========sssss================#{params[:user][:send_email_to_md].present? && params[:user][:send_email_to_md].to_s == "true"}===========")
     if params[:user][:send_email_to_md].present? && params[:user][:send_email_to_md].to_s == "true"
       logger.warn("=========send-email==============")
       HungerMailer.email_send_to_md(@user.email,"#{DOMAIN_CONFIG}/").deliver
