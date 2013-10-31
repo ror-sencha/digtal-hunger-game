@@ -44,7 +44,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
+    @user.destroy if @user.present?
     redirect_to users_path, :notice => "Successfully destroy user!"
   end
 
