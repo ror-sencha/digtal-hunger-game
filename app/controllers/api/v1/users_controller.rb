@@ -14,7 +14,8 @@ class Api::V1::UsersController < Api::V1::BaseController
     logger.warn("=======test=================-#{params[:user][:send_mail_to_md]}=====")
     if params[:user][:send_mail_to_md].present? && params[:user][:send_mail_to_md].to_s == "true"
       logger.warn("=========send-email==============")
-      HungerMailer.email_send_to_md(@user.email,"#{DOMAIN_CONFIG}/").deliver
+      md_user_email = User.find(params[:user][:md_id]).email
+      HungerMailer.email_send_to_md(md_user_email,"#{DOMAIN_CONFIG}/").deliver
     end
     logger.warn("=======1======#{@import_user.inspect}=========")
     if @import_user.present?
