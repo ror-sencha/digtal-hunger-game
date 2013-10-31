@@ -97,12 +97,12 @@ class Api::V1::PlayerChallengesController < Api::V1::BaseController
         logger.warn("========pc1=====#{@pc1.count}==#{@pc1.inspect}===========")
         @pc2 = @challenge.player_challenges.joins(:judge_points) # JudgePoint.count == 0
         logger.warn("========pc2=====#{@pc2.count}==#{@pc2.inspect}===========")
-        if @pc1.present? && @pc2.present?
+        #if @pc1.present? && @pc2.present?
           @playes_challenge = @pc1 - @pc2 
-          logger.warn("========pc3===#{@playes_challenge.inspect}=============")
-        else
-          @playes_challenge = []
-        end
+        #  logger.warn("========pc3===#{@playes_challenge.inspect}=============")
+        #else
+        #  @playes_challenge = []
+        #end
       else
         render_json({message: "No Data Present Yet !", status: 200}.to_json)
       end
