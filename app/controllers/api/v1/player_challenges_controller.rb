@@ -94,9 +94,12 @@ class Api::V1::PlayerChallengesController < Api::V1::BaseController
         jp2 = JudgePoint.all.map(&:user_id)
         #@player_challenges = @challenge.player_challenges.where("id not in (?) && user_id not in (?)",jp1,jp2)
         @pc1 = @challenge.player_challenges
-        @pc2 = @challenge.player_challenges.joins("left judge_points") unless JudgePoint.count > 1
+        logger.warn("========pc1=====#{@pc1.count}==#{@pc1.inspect}===========")
+        @pc2 = @challenge.player_challenges.joins("left judge_points") unless JudgePoint.count == 0
+        logger.warn("========pc2=====#{@pc2.count}==#{@pc2.inspect}===========")
         if @pc1.present? && @pc2.present?
           @playes_challenge = @pc1 - @pc2 
+          logger.warn("========pc3===#{@playes_challenge.inspect}=============")
         else
           @playes_challenge = []
         end
