@@ -4,6 +4,6 @@ node :profile_image do |c|
 	c.user.avatar.url if c.user.present? && c.user.avatar.present?
 end
 node :user_name do |c|
-	c.user.fullname
+	c.user.fullname if c.user.present? && c.user.fullname.present?
 end
 
